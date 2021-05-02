@@ -44,7 +44,7 @@ sc = ... # SparkContext
 
 mat = ... # an RDD of Vectors
 
-# Compute column summary statistics.
+//# Compute column summary statistics.//
 summary = Statistics.colStats(mat)
 
 print(summary.mean())
@@ -59,13 +59,11 @@ sc = ... # SparkContext
 seriesX = ... # a series
 seriesY = ... # must have the same number of partitions and cardinality as seriesX
 
-# Compute the correlation using Pearson's method. Enter "spearman" for Spearman's method. If a 
-# method is not specified, Pearson's method will be used by default. 
+
 print(Statistics.corr(seriesX, seriesY, method="pearson"))
 
 data = ... # an RDD of Vectors
-# calculate the correlation matrix using Pearson's method. Use "spearman" for Spearman's method.
-# If a method is not specified, Pearson's method will be used by default. 
+ 
 print(Statistics.corr(data, method="pearson"))
 
 Lấy mẫu phân tầng:
@@ -81,10 +79,9 @@ from pyspark.mllib.random import RandomRDDs
 
 sc = ... # SparkContext
 
-# Generate a random double RDD that contains 1 million i.i.d. values drawn from the
-# standard normal distribution `N(0, 1)`, evenly distributed in 10 partitions.
+
 u = RandomRDDs.uniformRDD(sc, 1000000L, 10)
-# Apply a transform to get a random double RDD following `N(1, 4)`.
+
 v = u.map(lambda x: 1.0 + 2.0 * x)
 Khai thác và chuyển đổi tính năng:
 from pyspark.ml.feature import HashingTF, IDF, Tokenizer
@@ -100,7 +97,6 @@ wordsData = tokenizer.transform(sentenceData)
 
 hashingTF = HashingTF(inputCol="words", outputCol="rawFeatures", numFeatures=20)
 featurizedData = hashingTF.transform(wordsData)
-# alternatively, CountVectorizer can also be used to get term frequency vectors
 
 idf = IDF(inputCol="rawFeatures", outputCol="features")
 idfModel = idf.fit(featurizedData)
